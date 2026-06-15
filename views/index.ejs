@@ -1,9 +1,61 @@
 <%- include("includes/header"); %>
 
-<div class="container">
+<div class="container d-flex flex-column align-items-center justify-content-center text-center" style="min-height: 70vh;">
+    <!-- Logo Centralizada -->
+    <div class="mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="320" height="200">
+            <defs>
+                <linearGradient id="orangeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#d9381e" />
+                    <stop offset="60%" stop-color="#f27d21" />
+                    <stop offset="100%" stop-color="#fbb03b" />
+                </linearGradient>
+            </defs>
 
-    <h3>Página Inicial</h3>
-    
+            <g transform="translate(45, 0)">
+                <!-- Column of Three Left Blocks -->
+                <rect x="140" y="40" width="32" height="32" rx="7" fill="#1fa89c" />
+                <rect x="140" y="82" width="32" height="32" rx="7" fill="#1388b3" />
+                <rect x="140" y="124" width="32" height="32" rx="7" fill="#0d5570" />
+
+                <!-- Center/Right Graphic Element -->
+                <path d="M 184,82 H 230 C 235,82 238,85 238,90 V 151 C 238,153 236,156 234,156 H 184 Z" fill="#0d5570" opacity="0.15" />
+                <path d="M 184,54 H 220 C 224,54 226,56 226,60 V 82 H 184 Z" fill="#1388b3" />
+                <path d="M 184,82 H 238 V 110 H 184 Z" fill="#1fa89c" />
+                <path d="M 238,90 V 156 H 184 L 230,156 C 234,156 238,152 238,148 Z" fill="#fbb03b" opacity="0.85" />
+
+                <!-- Checkmark/Arrow -->
+                <path d="M 184,98 
+                         C 192,112 200,126 210,138 
+                         L 218,142 
+                         C 234,118 256,92 278,64 
+                         L 294,76
+                         C 270,108 244,138 226,166 
+                         L 212,166 
+                         C 198,148 184,124 172,108 
+                         Z" fill="url(#orangeGrad)" />
+                <path d="M 292,62 L 316,40 L 302,82 Z" fill="#fbb03b" />
+            </g>
+
+            <!-- Logo Text -->
+            <text x="250" y="255" font-family="'Roboto', 'Inter', sans-serif" font-weight="900" font-size="52" text-anchor="middle" letter-spacing="1.5">
+                <tspan fill="#0d5570">PIK</tspan><tspan fill="#f27d21">FLOW</tspan>
+            </text>
+        </svg>
+    </div>
+
+    <!-- Mensagem de Boas-vindas -->
+    <h1 class="display-5 fw-bold mb-3" style="color: #0d5570;">Bem-vindo ao Pikflow!</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 600px;">
+        O seu sistema completo de gestão de tarefas e usuários. Organize fluxos, acompanhe o progresso e gerencie equipes com facilidade e elegância.
+    </p>
+
+    <!-- Botões de Acesso Rápido -->
+    <div class="mt-4">
+        <a href="/tasks" class="btn btn-primary px-4 py-2 me-2">Ver Tarefas</a>
+        <a href="/users" class="btn btn-outline-secondary px-4 py-2">Ver Usuários</a>
+    </div>
 </div>
 
 <%- include("includes/footer"); %>
+

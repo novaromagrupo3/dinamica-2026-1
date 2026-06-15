@@ -1,0 +1,27 @@
+<%- include("../includes/header"); %>
+
+<div class="container mt-4">
+    <h3 class="mb-4">Criar postagem</h3>
+
+    <form action="/posts/save" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">Texto da Postagem</label>
+            <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="publishedAt" class="form-label">Data de Publicação</label>
+            <input type="date" class="form-control" id="publishedAt" name="publishedAt" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2">Salvar</button>
+        <a href="/posts" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<%- include("../includes/footer"); %>

@@ -1,11 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 * {
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
 
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --navbar-bg: #20c997;
+    --footer-bg: #1e2125;
+}
+
+[data-bs-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #f8f9fa;
+    --card-bg: #1e1e1e;
+    --navbar-bg: #1a9e77;
+    --footer-bg: #000000;
+}
+
+[data-bs-theme="dark"] table,
+[data-bs-theme="dark"] label,
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6,
+[data-bs-theme="dark"] p,
+[data-bs-theme="dark"] .table {
+    color: var(--text-color) !important;
+}
+
+[data-bs-theme="dark"] .table {
+    border-color: #444;
+}
+
+[data-bs-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
 }
 
 .header {
@@ -32,17 +83,44 @@
 }
 
 .container {
-    min-height: calc(100vh - 56px - 100px);
-    padding: 50px;
+  flex: 1 0 auto;
+  padding: 50px;
 }
 
 .footer {
-    height: 100px;
-    background-color: silver;
-    padding: 10px;
+  background-color: var(--footer-bg) !important;
+  color: #f8f9fa;
+  border-top: 3px solid #20c997;
+}
+
+.social-icon {
+  color: #adb5bd;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  display: inline-block;
+}
+
+.social-icon:hover {
+  color: #20c997;
+  transform: translateY(-2px);
 }
 
 .concluido td:not(:last-child) {
-    text-decoration-line: line-through;
-    text-decoration-thickness: 2px;
+  text-decoration-line: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+.btn-primary {
+    background-color: #20c997 !important;
+    border-color: #20c997 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #1aa37a !important;
+    border-color: #1aa37a !important;
 }

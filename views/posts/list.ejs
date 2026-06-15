@@ -1,0 +1,59 @@
+<%- include("../includes/header"); %>
+
+<script>
+    function confirmar(mensagem) {
+        const result = confirm(mensagem);
+        if (!result) {
+            return false;
+        }
+    }
+</script>
+
+<div class="container mt-4">
+    <h3>Listagem de Postagens</h3>
+
+    <div class="mb-3">
+        <a type="button" class="btn btn-primary" href="/posts/create/">Criar postagem</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" style="min-width: 200px">Título</th>
+                <th scope="col" style="min-width: 300px">Conteúdo</th>
+                <th scope="col">Data de Publicação</th>
+                <th scope="col">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(const post of posts) { %>
+            <tr>
+                <td><%= post.title %></td>
+                <td>
+                    <%= post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content %>
+                </td>
+                <td>
+                    <% if (post.publishedAt) { %>
+                        <% const [year, month, day] = post.publishedAt.split('-'); %>
+                        <%= day %>/<%= month %>/<%= year %>
+                    <% } else { %>
+                        -
+                    <% } %>
+                </td>
+                <td>
+                    <form action="/posts/remove/<%= post.id %>" method="POST" style="display: inline-block" onsubmit="return confirmar('Tem certeza que deseja excluir essa postagem?')">
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            <% } %>
+            <% if (posts.length === 0) { %>
+                <tr>
+                    <td colspan="4" class="text-center">Nenhuma postagem encontrada.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<%- include("../includes/footer"); %>

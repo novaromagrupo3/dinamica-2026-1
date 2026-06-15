@@ -3,16 +3,16 @@ const bcrypt = require('bcrypt');
 
 function UserController() {
 
-  function list(req, res) {
-    User.findAll({ raw: true })
-      .then((data) => {
-
-        res.render('users/list', { 
-          title: "Lista de Tarefas",
-          users: data, 
-        })
-      })
-      .catch((err) => console.log(err))
+  async function list(req, res) {
+    try {
+      const data = await User.findAll({ raw: true });
+      res.render('users/list', {
+        title: "Lista de Usuários",
+        users: data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function create(req, res) {
@@ -20,11 +20,11 @@ function UserController() {
   }
 
   async function save(req, res) {
-    
+
     const body = req.body;
 
-    if (body.password != body.confirm_password) {
-      res.render('users/create', {
+    if (body.password != body.password_confirmation) {
+      return res.render('users/create', {
         error: {
           message: 'Os campos senha e confirmar senha são diferentes.'
         }
@@ -43,64 +43,71 @@ function UserController() {
       await User.create(user);
       res.redirect('/users');
     } catch (error) {
-      console.log(error);      
+      console.log(error);
     }
   }
 
-  function remove(req, res) {
+  async function remove(req, res) {
     const id = req.params.id;
-
-    User.destroy({ where: { id: id } })
-      .then(res.redirect('/users'))
-      .catch((err) => console.log(err))
+    try {
+      await User.destroy({ where: { id: id } });
+      res.redirect('/users');
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function edit(req, res) {
-    const id = req.params.id
-
-    User.findOne({ where: { id: id }, raw: true })
-      .then((data) => {
-        res.render('users/edit', { user: data })
-      })
-      .catch((err) => console.log())
+  async function edit(req, res) {
+    const id = req.params.id;
+    try {
+      const data = await User.findOne({ where: { id: id }, raw: true });
+      res.render('users/edit', { user: data });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function update(req, res) {
+  async function update(req, res) {
     console.log(req.body);
-    const id = req.body.id
+    const id = req.body.id;
+
+    const activeStatus = req.body.done === '1';
 
     const user = {
-      title: req.body.title,
-      description: req.body.description,
-      done: req.body.done === '1' ? true : false
-    }
+      name: req.body.name,
+      email: req.body.email,
+      active: activeStatus
+    };
 
-    User.update(user, { where: { id: id } })
-      .then(res.redirect('/users'))
-      .catch((err) => console.log(err))
+    try {
+      await User.update(user, { where: { id: id } });
+      res.redirect('/users');
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function updateStatus(req, res) {
-    const id = req.params.id
+  async function updateStatus(req, res) {
+    const id = req.params.id;
+    const activeStatus = req.body.active === '1' ? false : true;
 
-    const user = {
-      done: req.body.done === '0' ? true : false,
+    try {
+      await User.update({ active: activeStatus }, { where: { id: id } });
+      res.redirect('/users');
+    } catch (err) {
+      console.log(err);
     }
+  }
 
- 	  User.update(user, { where: { id: id } })
-      .then(res.redirect('/users'))
-      .catch((err) => console.log())
-    }
-
-    return {
-      create,
-      save,
-      list,
-      remove,
-      edit,
-      update,
-      updateStatus,
-    }
+  return {
+    create,
+    save,
+    list,
+    remove,
+    edit,
+    update,
+    updateStatus,
+  }
 
 }
 
